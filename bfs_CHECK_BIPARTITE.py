@@ -20,34 +20,27 @@ g2 ={
     4 : [2,3]
 }
 
-def is_bipartite(graph:dict):
-    # Number of vertices
+def is_bipartite(graph:dict,start):
+
     n = len(graph)
-    
-    # -1 indicates uncolored, 0 and 1 are the two colors
     color = [-1] * (n+1)
+    queue = deque([start])
+    color[start] = 0 
     
-    # Process all components
-    for start in graph.keys():
-        if color[start] == -1:  # If not yet colored
-            queue = deque([start])
-            color[start] = 0  # Start coloring with color 0
-            
-            while queue:
-                u = queue.popleft()
-                
-                for v in graph[u]:
-                    if color[v] == -1:  # If the vertex v is uncolored
-                        color[v] = 1 - color[u]  # Color it with the opposite color
-                        queue.append(v)
-                    elif color[v] == color[u]:
-                        print(color)  # If the adjacent vertex has the same color
-                        return False
-    print(color)
+    while queue:
+        u = queue.popleft()
+        
+        for v in graph[u]:
+            if color[v] == -1:
+                color[v] = 1 - color[u] 
+                queue.append(v)
+            elif color[v] == color[u]:
+                return False
+    
     return True
 
-print(is_bipartite(graph_queston))
-print(is_bipartite(g2))
+print(is_bipartite(graph_queston,1))
+print(is_bipartite(g2,1))
 
 
 

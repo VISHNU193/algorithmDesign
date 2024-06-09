@@ -19,7 +19,5 @@ def dfs(graph, s):
     
     for neighbour in graph[s]:
         if not visited[neighbour]:
-            print(f"Visited {neighbour}")
-            visited[neighbour] = True
             dfs(graph, neighbour)
-dfs(graph_queston,1)
+dfs(graph_queston,10)
